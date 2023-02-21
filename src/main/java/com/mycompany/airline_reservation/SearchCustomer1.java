@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,7 +18,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -30,14 +33,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author cjaya
  */
-public class AddCustomer extends javax.swing.JInternalFrame {
+public class SearchCustomer1 extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form AddCustomer
      */
-    public AddCustomer() {
+    public SearchCustomer1() {
         initComponents();
-        AutoID();
+//        AutoID();
     }
     
     Connection con;
@@ -64,9 +67,9 @@ public class AddCustomer extends javax.swing.JInternalFrame {
                 customerid.setText("CS"+String.format("%03d", id));
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchCustomer1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchCustomer1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,7 +86,6 @@ public class AddCustomer extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        customerid = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         dob = new com.toedter.calendar.JDateChooser();
@@ -107,6 +109,8 @@ public class AddCustomer extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         address = new javax.swing.JTextArea();
+        customerid = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -114,24 +118,19 @@ public class AddCustomer extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 24)); // NOI18N
         jLabel1.setText("Customer ID : ");
 
-        jButton1.setText("Add");
+        jButton1.setText("UPDATE");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancel");
+        jButton2.setText("CANCEL");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        customerid.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        customerid.setForeground(new java.awt.Color(255, 51, 51));
-        customerid.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        customerid.setFocusable(false);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 255));
 
@@ -304,6 +303,13 @@ public class AddCustomer extends javax.swing.JInternalFrame {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
+        jButton4.setText("Search");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -311,8 +317,10 @@ public class AddCustomer extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(customerid, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(customerid, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
@@ -343,7 +351,8 @@ public class AddCustomer extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(customerid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(customerid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
@@ -363,7 +372,7 @@ public class AddCustomer extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton1)
                                     .addComponent(jButton2))))))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         pack();
@@ -400,44 +409,47 @@ public class AddCustomer extends javax.swing.JInternalFrame {
             
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/reservation_system","root","Jaya@8186");
-            pre = con.prepareStatement("insert into customer(CustID, FirstName, LastName, PassportID, NicID, Dob,Contact, Address ,Gender, photo) values(?,?,?,?,?,?,?,?,?,?)");
+            pre = con.prepareStatement("update customer set  FirstName = ?, LastName=?, PassportID=?, NicID=?, Dob=?,Contact=?, Address=? ,Gender=?, photo=? where CustID=?");
             
-            pre.setString(1, CustID);
-            pre.setString(2, FirstName);
-            pre.setString(3, LastName);
-            pre.setString(4, Passport);
-            pre.setString(5, NIC);
-            pre.setString(6, date);
-            pre.setString(7, Contact);
-            pre.setString(8, Address);
-            pre.setString(9, Gender);
-            pre.setBytes(10,userimage);
+//            pre.setString(1, CustID);
+            pre.setString(1, FirstName);
+            pre.setString(2, LastName);
+            pre.setString(3, Passport);
+            pre.setString(4, NIC);
+            pre.setString(5, date);
+            pre.setString(6, Contact);
+            pre.setString(7, Address);
+            pre.setString(8, Gender);
+            pre.setBytes(9,userimage);
+            pre.setString(10,CustID);
             
             pre.executeUpdate();
             JOptionPane.showMessageDialog(null, "Customer added ");
             
-            AutoID();
+//            AutoID();
             
-            firstname.setText("");
-            lastname.setText("");
-            passportid.setText("");
-            nic.setText("");
-            contact.setText("");
-            address.setText("");
-            if(male.isSelected()){
-                male.setSelected(false);
-            }
-            else {
-                female.setSelected(false);
-            }
-            dob.cleanup();
-            
+//            firstname.setText("");
+//            lastname.setText("");
+//            passportid.setText("");
+//            nic.setText("");
+//            contact.setText("");
+//            address.setText("");
+//            if(male.isSelected()){
+//                male.setSelected(false);
+//            }
+//            else {
+//                female.setSelected(false);
+//            }
+//            dob.cleanup();
+            this.hide();
             
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchCustomer1.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchCustomer1.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -447,19 +459,20 @@ public class AddCustomer extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-            firstname.setText("");
-            lastname.setText("");
-            passportid.setText("");
-            nic.setText("");
-            contact.setText("");
-            address.setText("");
-            if(male.isSelected()){
-                male.setSelected(false);
-            }
-            else {
-                female.setSelected(false);
-            }
-            dob.cleanup();
+//            firstname.setText("");
+//            lastname.setText("");
+//            passportid.setText("");
+//            nic.setText("");
+//            contact.setText("");
+//            address.setText("");
+//            if(male.isSelected()){
+//                male.setSelected(false);
+//            }
+//            else {
+//                female.setSelected(false);
+//            }
+//            dob.cleanup();
+                this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -496,24 +509,93 @@ public class AddCustomer extends javax.swing.JInternalFrame {
                     
             
         } catch (IOException ex) {
-            Logger.getLogger(AddCustomer.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchCustomer1.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+        String CustId = customerid.getText();
+        
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/reservation_system","root","Jaya@8186");
+            
+            pre = con.prepareStatement("select * from customer where CustID = ?");
+            pre.setString(1, CustId);
+            ResultSet rs = pre.executeQuery();
+            
+            if(rs.next() == false) {
+                JOptionPane.showMessageDialog(this,"User not found");
+            }
+            else
+            {
+                String fname = rs.getString("FirstName");
+                String lname = rs.getString("LastName");
+                String passport1 = rs.getString("PassportID");
+                String nic1 = rs.getString("NicID");
+                String address1 = rs.getString("Address");
+                String dob1 = rs.getString("Dob");
+                Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(dob1);
+                String gender1 = rs.getString("Gender");
+                
+                Blob blob = rs.getBlob("photo");
+                byte[] _imagebytes = blob.getBytes(1, (int) blob.length());
+                ImageIcon image = new ImageIcon(_imagebytes);
+                Image in = image.getImage();
+                Image myImg = in.getScaledInstance(photo.getWidth(), photo.getHeight(), Image.SCALE_DEFAULT);
+                ImageIcon newImage = new ImageIcon(myImg);
+                
+                if(gender1.equals("Female")){
+                    male.setSelected(false);
+                    female.setSelected(true);
+                }
+                else
+                {
+                    male.setSelected(true);
+                    female.setSelected(false);
+                }
+                String contact1 = rs.getString("Contact");
+                
+                firstname.setText(fname.trim());
+                lastname.setText(lname.trim());
+                passportid.setText(passport1.trim());
+                nic.setText(nic1);
+                address.setText(address1.trim());
+                contact.setText(contact1.trim());
+                
+                dob.setDate(date1);
+                photo.setIcon(newImage);
+                
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchCustomer1.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchCustomer1.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(SearchCustomer1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea address;
     private javax.swing.JTextField contact;
-    private javax.swing.JLabel customerid;
+    private javax.swing.JTextField customerid;
     private com.toedter.calendar.JDateChooser dob;
     private javax.swing.JRadioButton female;
     private javax.swing.JTextField firstname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

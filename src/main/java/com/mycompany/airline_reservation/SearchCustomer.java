@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -230,19 +231,20 @@ public class SearchCustomer extends javax.swing.JInternalFrame {
             pre.setString(1,CustID);
             
             ResultSet rs = pre.executeQuery();
-            rs.next();
-            
-            firstname.setText(rs.getString("FirstName"));
-            lastname.setText(rs.getString("LastName"));
-            passport.setText(rs.getString("PassportID"));
-            ncid.setText(rs.getString("NicID"));
-            address.setText(rs.getString("Address"));
-            contact.setText(rs.getString("Contact"));
-            if(rs.getString("Gender") == "Male") {
-                male.setChecked(true);
-                
-             }
-            else female.isSelected();
+            if(rs.next() == false) {
+                JOptionPane.showMessageDialog(null, "Customer not found add customer first");
+                AddCustomer addcustomer = new AddCustomer();
+//                Desktop.add(addcustomer);
+                addcustomer.setVisible(true);
+            }
+            else{
+                firstname.setText(rs.getString("FirstName"));
+                lastname.setText(rs.getString("LastName"));
+                passport.setText(rs.getString("PassportID"));
+                ncid.setText(rs.getString("NicID"));
+                address.setText(rs.getString("Address"));
+                contact.setText(rs.getString("Contact"));
+            }
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchCustomer.class.getName()).log(Level.SEVERE, null, ex);
