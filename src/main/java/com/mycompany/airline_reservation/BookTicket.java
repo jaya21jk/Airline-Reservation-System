@@ -309,13 +309,13 @@ public class BookTicket extends javax.swing.JInternalFrame {
                                             .addComponent(Book_Ticket, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
+                                        .addGap(25, 25, 25)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(firstname, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                                             .addComponent(custid)
                                             .addComponent(lastname)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
+                                        .addGap(23, 23, 23)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(fare, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,9 +324,9 @@ public class BookTicket extends javax.swing.JInternalFrame {
                                                 .addComponent(flightid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGroup(layout.createSequentialGroup()
                                                     .addComponent(passport, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(0, 0, Short.MAX_VALUE)))))
+                                                    .addGap(0, 2, Short.MAX_VALUE)))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
+                                        .addGap(34, 34, 34)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jButton4)
                                             .addComponent(numberoftickets, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -394,12 +394,9 @@ public class BookTicket extends javax.swing.JInternalFrame {
                             .addComponent(flightname, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(duration, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                            .addComponent(jLabel14)
+                            .addComponent(duration, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel10)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -479,22 +476,34 @@ public class BookTicket extends javax.swing.JInternalFrame {
             String PassportID = passport.getText();
             
             
+            int row = table.getSelectedRow();
+            int col = 1;
+            String FlightName = table.getModel().getValueAt(row, col).toString();
+            col = 2;
+            String Arrival = table.getModel().getValueAt(row, col).toString();
+            col = 3;
+            String Departure = table.getModel().getValueAt(row, col).toString();
+            
+            
             DateFormat da = new SimpleDateFormat("yy-MM-dd");
             String Date = da.format(date.getDate());
             
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/reservation_system","root","Jaya@8186");
-            pre = con.prepareStatement("insert into ticket(TicketID, CustomerName, CustomerID, Price, Date, Seats, FlightID, PassportID, ClassType) values(?,?,?,?,?,?,?,?,?)");
+            pre = con.prepareStatement("insert into ticket(TicketID, CustomerName, CustomerId, FlightName,Arrival, Departure, Price, Date, Seats, FlightID, PassportID, ClassType) values(?,?,?,?,?,?,?,?,?,?,?,?)");
             
             pre.setString(1, TicketID);
-            pre.setString(2, FirstName + LastName);
+            pre.setString(2, FirstName +" " + LastName);
             pre.setString(3, CustID);
-            pre.setString(4, Price);
-            pre.setString(5, Date);
-            pre.setString(6, Seats);
-            pre.setString(7, FlightID);
-            pre.setString(8, PassportID);
-            pre.setString(9, ClassType);
+            pre.setString(4, FlightName);
+            pre.setString(5, Arrival);
+            pre.setString(6, Departure);
+            pre.setString(7, Price);
+            pre.setString(8, Date);
+            pre.setString(9, Seats);
+            pre.setString(10, FLightID);
+            pre.setString(11, PassportID);
+            pre.setString(12, ClassType);
             
             pre.executeUpdate();
             JOptionPane.showMessageDialog(null, "Ticket Bookes !. ");

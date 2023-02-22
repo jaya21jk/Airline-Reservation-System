@@ -42,6 +42,8 @@ public class GetTicket1 extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
 
+        setClosable(true);
+
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

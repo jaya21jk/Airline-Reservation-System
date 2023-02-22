@@ -146,7 +146,7 @@ public class LoginWindow extends javax.swing.JFrame {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/reservation_system","root","Jaya@8186");
-            pre = con.prepareStatement("Select * from Admin where Username=? and Password=?");
+            pre = con.prepareStatement("Select * from Admin where binary Username=? and binary Password=?");
             pre.setString(1,Username);
             pre.setString(2,Password);
             
