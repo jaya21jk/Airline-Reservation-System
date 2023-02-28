@@ -400,6 +400,16 @@ public class AddCustomer extends javax.swing.JInternalFrame {
             
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/reservation_system","root","Jaya@8186");
+            
+            pre = con.prepareStatement("select PassportID from customer where PassportID = ?");
+            pre.setString(1, Passport);
+            ResultSet rs = pre.executeQuery();
+            
+            if(rs.next()) {
+                JOptionPane.showMessageDialog(null,"Passport ID is already registered please enter correct Passport ID");
+            }
+            
+            else {
             pre = con.prepareStatement("insert into customer(CustID, FirstName, LastName, PassportID, NicID, Dob,Contact, Address ,Gender, photo) values(?,?,?,?,?,?,?,?,?,?)");
             
             pre.setString(1, CustID);
@@ -416,21 +426,23 @@ public class AddCustomer extends javax.swing.JInternalFrame {
             pre.executeUpdate();
             JOptionPane.showMessageDialog(null, "Customer added ");
             
-            AutoID();
-            
-            firstname.setText("");
-            lastname.setText("");
-            passportid.setText("");
-            nic.setText("");
-            contact.setText("");
-            address.setText("");
-            if(male.isSelected()){
-                male.setSelected(false);
+//            AutoID();
+//            
+//            firstname.setText("");
+//            lastname.setText("");
+//            passportid.setText("");
+//            nic.setText("");
+//            contact.setText("");
+//            address.setText("");
+//            if(male.isSelected()){
+//                male.setSelected(false);
+//            }
+//            else {
+//                female.setSelected(false);
+//            }
+//            dob.cleanup();
+               this.hide();
             }
-            else {
-                female.setSelected(false);
-            }
-            dob.cleanup();
             
             
         } catch (ClassNotFoundException ex) {

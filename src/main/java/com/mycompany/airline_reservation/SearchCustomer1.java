@@ -103,12 +103,12 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         lastname = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        passportid = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        nic = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         address = new javax.swing.JTextArea();
+        passportid = new javax.swing.JLabel();
+        nic = new javax.swing.JLabel();
         customerid = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
 
@@ -247,6 +247,10 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
         address.setRows(5);
         jScrollPane1.setViewportView(address);
 
+        passportid.setForeground(new java.awt.Color(240, 240, 240));
+
+        nic.setForeground(new java.awt.Color(240, 240, 240));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -254,23 +258,18 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addGap(36, 36, 36)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(firstname, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(lastname)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                            .addComponent(passportid, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nic, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(firstname, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(lastname)
+                            .addComponent(passportid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -291,12 +290,12 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(passportid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passportid, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(nic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(nic, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -409,22 +408,25 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
             
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/reservation_system","root","Jaya@8186");
-            pre = con.prepareStatement("update customer set  FirstName = ?, LastName=?, PassportID=?, NicID=?, Dob=?,Contact=?, Address=? ,Gender=?, photo=? where CustID=?");
+            
+            
+           
+            pre = con.prepareStatement("update customer set  FirstName = ?, LastName=?, Dob=?,Contact=?, Address=? ,Gender=?, photo=? where CustID=?");
             
 //            pre.setString(1, CustID);
             pre.setString(1, FirstName);
             pre.setString(2, LastName);
             pre.setString(3, Passport);
-            pre.setString(4, NIC);
-            pre.setString(5, date);
-            pre.setString(6, Contact);
-            pre.setString(7, Address);
-            pre.setString(8, Gender);
-            pre.setBytes(9,userimage);
-            pre.setString(10,CustID);
+//            pre.setString(4, NIC);
+//            pre.setString(5, date);
+            pre.setString(4, Contact);
+            pre.setString(5, Address);
+            pre.setString(6, Gender);
+            pre.setBytes(7,userimage);
+            pre.setString(8,CustID);
             
             pre.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Customer added ");
+            JOptionPane.showMessageDialog(null, "Customer Dtails Updated Succssfully ");
             
 //            AutoID();
             
@@ -442,6 +444,7 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
 //            }
 //            dob.cleanup();
             this.hide();
+            
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SearchCustomer1.class.getName()).log(Level.SEVERE, null, ex);
@@ -525,7 +528,7 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/reservation_system","root","Jaya@8186");
             
-            pre = con.prepareStatement("select * from customer where CustID = ?");
+            pre = con.prepareStatement("select * from customer where binary CustID = ?");
             pre.setString(1, CustId);
             ResultSet rs = pre.executeQuery();
             
@@ -612,8 +615,8 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lastname;
     private javax.swing.JRadioButton male;
-    private javax.swing.JTextField nic;
-    private javax.swing.JTextField passportid;
+    private javax.swing.JLabel nic;
+    private javax.swing.JLabel passportid;
     private javax.swing.JLabel photo;
     // End of variables declaration//GEN-END:variables
 }

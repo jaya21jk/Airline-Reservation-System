@@ -111,7 +111,7 @@ public class GetTicket1 extends javax.swing.JInternalFrame {
                 DFT.addRow(v2);
             }
             if(flag == false) {
-               JOptionPane.showMessageDialog(null,"No flights found try again later");
+               JOptionPane.showMessageDialog(null,"No tickets found try again later");
             }
             
         } catch (ClassNotFoundException ex) {

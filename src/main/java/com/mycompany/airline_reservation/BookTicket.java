@@ -181,10 +181,7 @@ public class BookTicket extends javax.swing.JInternalFrame {
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Flight_D", "Flight_Name", "Arrival", "Departure", "Date", "Duration(Hoursr)"

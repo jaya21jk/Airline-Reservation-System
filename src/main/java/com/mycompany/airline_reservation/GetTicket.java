@@ -301,7 +301,7 @@ public class GetTicket extends javax.swing.JInternalFrame {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/reservation_system","root","Jaya@8186");
-            pre = con.prepareStatement("select * from ticket where TicketID=?");
+            pre = con.prepareStatement("select * from ticket where binary TicketID=?");
             pre.setString(1,TicketId);
             pre.executeQuery();
             

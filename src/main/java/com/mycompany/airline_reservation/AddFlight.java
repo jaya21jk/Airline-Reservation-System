@@ -314,7 +314,7 @@ public class AddFlight extends javax.swing.JInternalFrame {
             pre.setString(8, Duration);
             
             pre.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Customer added ");
+            JOptionPane.showMessageDialog(null, "Flight added Successfully ");
             
             AutoID();
             
