@@ -157,7 +157,7 @@ public class ResetPassword extends javax.swing.JFrame {
             ResultSet rs = pre.executeQuery();
             
             if(rs.next() == false) {
-                JOptionPane.showMessageDialog(null, "User Does not exit");
+                JOptionPane.showMessageDialog(null, "User Does not exist");
                 username.setText("");
                 password.setText("");
             }else {

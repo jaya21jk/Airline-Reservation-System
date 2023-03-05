@@ -341,9 +341,8 @@ public class BookTicket extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(classtype, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(12, 12, 12)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,6 +467,7 @@ public class BookTicket extends javax.swing.JInternalFrame {
             String LastName = lastname.getText();
             String ClassType = classtype.getSelectedItem().toString();
             String Seats = numberoftickets.getValue().toString();
+            int numberOfSeats = Integer.parseInt(Seats);
             String Price = totalfare.getText();
             String FLightID = flightid.getText();
             String PassportID = passport.getText();
@@ -487,6 +487,16 @@ public class BookTicket extends javax.swing.JInternalFrame {
             
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/reservation_system","root","Jaya@8186");
+            pre = con.prepareStatement("select Seats from flight where FlightID=?");
+            pre.setString(1, FlightID);
+            ResultSet rs = pre.executeQuery();
+            rs.next();
+            String TotalSeats = rs.getString("Seats");
+            int totalSeats = Integer.parseInt(TotalSeats);
+            if(totalSeats < numberOfSeats) {
+                JOptionPane.showMessageDialog(null, "avalilable seats are : "+totalSeats + " only");
+            }
+            else{
             pre = con.prepareStatement("insert into ticket(TicketID, CustomerName, CustomerId, FlightName,Arrival, Departure, Price, Date, Seats, FlightID, PassportID, ClassType) values(?,?,?,?,?,?,?,?,?,?,?,?)");
             
             pre.setString(1, TicketID);
@@ -502,11 +512,18 @@ public class BookTicket extends javax.swing.JInternalFrame {
             pre.setString(11, PassportID);
             pre.setString(12, ClassType);
             
+            
+            pre.executeUpdate();
+            pre = con.prepareStatement("update flight set Seats=? where FLightID=?");
+            int remainSeats = totalSeats - numberOfSeats;
+            pre.setString(1, ""+remainSeats);
+            pre.setString(2, FlightID);
             pre.executeUpdate();
             JOptionPane.showMessageDialog(null, "Ticket Bookes !. ");
             
             
             this.hide();
+            }
             
 
         } catch (ClassNotFoundException ex) {
@@ -597,6 +614,14 @@ public class BookTicket extends javax.swing.JInternalFrame {
             flightid.setText(DFT.getValueAt(selectIndex, 0).toString());
             flightname.setText(DFT.getValueAt(selectIndex, 1).toString());
             duration.setText(DFT.getValueAt(selectIndex, 5).toString());
+            
+            String dob1 = DFT.getValueAt(selectIndex, 4).toString();
+        try {
+            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(dob1);
+            date.setDate(date1);
+        } catch (ParseException ex) {
+            Logger.getLogger(BookTicket.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
             
         

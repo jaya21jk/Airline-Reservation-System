@@ -52,8 +52,9 @@ public class LoginWindow extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("Login Page");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 34, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 0));
 
@@ -92,7 +93,7 @@ public class LoginWindow extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 92, -1, -1));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, -1, -1));
 
         login.setText("Login");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +101,7 @@ public class LoginWindow extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
-        jPanel2.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 253, -1, -1));
+        jPanel2.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
 
         cancel.setText("Cancel");
         cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +109,7 @@ public class LoginWindow extends javax.swing.JFrame {
                 cancelActionPerformed(evt);
             }
         });
-        jPanel2.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 253, -1, -1));
+        jPanel2.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, -1, -1));
 
         jButton4.setText("Reset Password ?");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -116,20 +117,17 @@ public class LoginWindow extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, -1, -1));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
         );
 
         pack();

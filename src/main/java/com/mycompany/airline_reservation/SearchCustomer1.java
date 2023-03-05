@@ -112,6 +112,7 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
         customerid = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 0));
         setClosable(true);
         setResizable(true);
 
@@ -416,9 +417,9 @@ public class SearchCustomer1 extends javax.swing.JInternalFrame {
 //            pre.setString(1, CustID);
             pre.setString(1, FirstName);
             pre.setString(2, LastName);
-            pre.setString(3, Passport);
+//            pre.setString(3, Passport);
 //            pre.setString(4, NIC);
-//            pre.setString(5, date);
+            pre.setString(3, date);
             pre.setString(4, Contact);
             pre.setString(5, Address);
             pre.setString(6, Gender);
