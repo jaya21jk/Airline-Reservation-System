@@ -7,6 +7,8 @@ If user forgots password he can reset using reset password option.
 If he enter correct credentials he can enter main page
 
 ![Screenshot 2023-03-15 185256](https://user-images.githubusercontent.com/118426342/225321563-a29070d1-c9da-4816-ae96-b190513b94ce.png)
+![Screenshot 2023-03-15 185256](https://user-images.githubusercontent.com/118426342/225323469-8f01a078-6d2d-4483-a911-558f447e821e.png)
+
 
 Add customer page will be like
 
