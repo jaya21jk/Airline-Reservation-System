@@ -29,7 +29,7 @@ Admin can fetch ticket details and he can cancel ticket at any time from this ta
 
 ![Screenshot 2023-03-15 185808](https://user-images.githubusercontent.com/118426342/225322811-b21be617-eebc-470f-b3ff-698f607db4a5.png)
 
-Admin can all tiket details and particular customer details here
+Admin can fetch all tikets details and particular customer details here
 
 
 ![Screenshot 2023-03-15 190218](https://user-images.githubusercontent.com/118426342/225323932-90b8fe1a-8217-418f-957d-a7ece38991c7.png)
