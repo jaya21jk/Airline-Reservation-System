@@ -6,7 +6,8 @@ If user forgots password he can reset using reset password option.
 
 If he enter correct credentials he can enter main page
 
-![Screenshot 2023-03-15 185256](https://user-images.githubusercontent.com/118426342/225321563-a29070d1-c9da-4816-ae96-b190513b94ce.png)
+Main page will be like this
+
 ![Screenshot 2023-03-15 185256](https://user-images.githubusercontent.com/118426342/225323469-8f01a078-6d2d-4483-a911-558f447e821e.png)
 
 
@@ -27,3 +28,8 @@ Booking tikets tab
 Admin can fetch ticket details and he can cancel ticket at any time from this tab only
 
 ![Screenshot 2023-03-15 185808](https://user-images.githubusercontent.com/118426342/225322811-b21be617-eebc-470f-b3ff-698f607db4a5.png)
+
+Admin can all tiket details and particular customer details here
+
+
+![Screenshot 2023-03-15 190218](https://user-images.githubusercontent.com/118426342/225323932-90b8fe1a-8217-418f-957d-a7ece38991c7.png)
